@@ -176,7 +176,7 @@ function(Jupyter,
                 // TODO: get separate token / tmpurl for each single file
                 //       backend could deny parallel downloads?
                 //       backand could track single download? (and progress)
-                if (elem.type == 'file') {
+                if (elem.type == 'file' || elem.type == 'notebook') {
                     files.push(elem.name)
                 }
             })
