@@ -119,19 +119,40 @@ function(Jupyter,
         /* locate the right-side dropdown menu of apps and notebooks */
         var btnbar = $('.tree-buttons')
 
+        var upload_menu = $(
+            '<div id="upload-buttons" class="btn-group">' +
+              '<button class="dropdown-toggle btn btn-default btn-xs" data-toggle="dropdown">' +
+                '<span>Import</span>' +
+                '<span class="caret"></span>' +
+              '</button>' +
+              '<ul id="upload-menu" class="dropdown-menu">' +
+                '<li role="presentation" id="upload-dropbox">' +
+                '</li>' +
+                '<li role="presentation" id="upload-ecostore">' +
+                '</li>' +
+              '</ul>' +
+            '</div>'
+        );
+
         // setup dropbox buttons
         // TODO: classes to use on a tag? ... dropbox-dropin-progress, dropbox-dropin-success, dropbox-dropin-disabled, dropbox-dropin-error
-        var chooser_btn = $('<a href="#" class="dropbox-dropin-btn dropbox-dropin-default"><span class="dropin-btn-status"></span>Choose from Dropbox</a>')
+        //var chooser_btn = $('<a href="#" class="dropbox-dropin-btn dropbox-dropin-default"><span class="dropin-btn-status"></span>Dropbox</a>')
+        var chooser_btn = $('<a href="#"><span class="dropin-btn-status"></span>Dropbox</a>')
 
-        var chooser_ecostore = $('<a href="#" class="btn btn-xs btn-default">Choose from EcoStore</a>')
+        //var chooser_ecostore = $('<a href="#" class="btn btn-xs btn-default">ecocloud Store</a>')
+        var chooser_ecostore = $('<a href="#">ecocloud Store</a>')
+
+        upload_menu.find('#upload-dropbox').append(chooser_btn);
+        upload_menu.find('#upload-ecostore').append(chooser_ecostore);
+
+        // add buttons to UI
+        btnbar.children('div').prepend(upload_menu);
+
 
         var saver_btn = $('<a href="#" class="dropbox-dropin-btn dropbox-dropin-default"><span class="dropin-btn-status"></span>Save to Dropbox</a>')
         saver_btn.css('display', 'none')
         $('.dynamic-buttons').append(saver_btn)
 
-
-        // add buttons to UI
-        btnbar.children('div').prepend(chooser_btn, chooser_ecostore)
 
         // hook up events on buttons
         chooser_btn.click(function(evt) {
